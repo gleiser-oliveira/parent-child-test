@@ -1,0 +1,26 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Parent
+    network: chapel
+    source:
+      address: "0xaaF55E6e88C72a8FDAFf1f983A86984143f291FB"
+      abi: Parent
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - NewChild
+        - NewDelayedChild
+      abis:
+        - name: Parent
+          file: ./abis/Parent.json
+      eventHandlers:
+        - event: NewChild(address)
+          handler: handleNewChild
+        - event: NewDelayedChild(address)
+          handler: handleNewDelayedChild
+      file: ./src/parent.ts

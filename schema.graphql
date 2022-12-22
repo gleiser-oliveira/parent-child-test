@@ -1,0 +1,15 @@
+type NewChild @entity(immutable: true) {
+  id: Bytes!
+  child: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NewDelayedChild @entity(immutable: true) {
+  id: Bytes!
+  delayedChild: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

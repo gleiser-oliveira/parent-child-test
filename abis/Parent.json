@@ -1,0 +1,42 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "child",
+        "type": "address"
+      }
+    ],
+    "name": "NewChild",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "delayedChild",
+        "type": "address"
+      }
+    ],
+    "name": "NewDelayedChild",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "bringNewDelayedChild",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "bringNewLife",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
