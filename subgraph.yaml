@@ -18,6 +18,10 @@ dataSources:
       abis:
         - name: Parent
           file: ./abis/Parent.json
+        - name: Child
+          file: ./abis/Child.json
+        - name: DelayedChild
+          file: ./abis/DelayedChild.json
       eventHandlers:
         - event: NewChild(address)
           handler: handleNewChild

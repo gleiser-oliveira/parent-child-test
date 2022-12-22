@@ -2,30 +2,37 @@ import {
   NewChild as NewChildEvent,
   NewDelayedChild as NewDelayedChildEvent
 } from "../generated/Parent/Parent"
-import { NewChild, NewDelayedChild } from "../generated/schema"
+import {
+  Child as ChildContract,
+} from '../generated/Parent/Child'
+import {
+  DelayedChild as DelayedChildContract,
+} from '../generated/Parent/DelayedChild'
+import { Child, DelayedChild } from "../generated/schema"
+import { Address } from "@graphprotocol/graph-ts";
 
 export function handleNewChild(event: NewChildEvent): void {
-  let entity = new NewChild(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
+  const hardcodedChildAddress = "0x38A9fab9058a076A034B25b32B979C06bd7d7929";
+  let entity = new Child(
+    hardcodedChildAddress
   )
-  entity.child = event.params.child
+  const childContract = ChildContract.bind(Address.fromString(hardcodedChildAddress))
 
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
+  entity.age = childContract.AGE()
+  entity.familyName = childContract.try_familyName().value
+  entity.name = childContract.NAME()
 
   entity.save()
 }
 
 export function handleNewDelayedChild(event: NewDelayedChildEvent): void {
-  let entity = new NewDelayedChild(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
+  let entity = new DelayedChild(
+    event.params.delayedChild.toHexString()
   )
-  entity.delayedChild = event.params.delayedChild
+  const dcContract = DelayedChildContract.bind(event.params.delayedChild)
 
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
+  entity.toys = dcContract.toys()
+  entity.name = dcContract.name()
 
   entity.save()
 }
